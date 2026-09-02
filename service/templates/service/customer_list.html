@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Customers
+{% endblock %}
+
+{% block content %}
+
+<h1>Customers</h1>
+
+{% for customer in customers %}
+
+    <div>
+        <h3>{{ customer.name }}</h3>
+        <p>Email: {{ customer.email }}</p>
+        <p>Phone: {{ customer.phone }}</p>
+    </div>
+
+{% empty %}
+
+    <p>No customers found.</p>
+
+{% endfor %}
+
+{% endblock %}
