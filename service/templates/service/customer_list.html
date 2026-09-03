@@ -18,6 +18,9 @@ Customers
         <p>Phone: {{ customer.phone }}</p>
     </div>
 
+    <a href="{% url 'customer_detail' customer.id %}">
+    View Details</a>
+
 {% empty %}
 
     <p>No customers found.</p>
