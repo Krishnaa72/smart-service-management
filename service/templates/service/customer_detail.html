@@ -12,6 +12,14 @@ Customer Details
 <p>Email: {{ customer.email }}</p>
 <p>Phone: {{ customer.phone }}</p>
 
+<a href="{% url 'customer_update' customer.id %}">
+    Edit Customer
+</a>
+
+<a href="{% url 'customer_delete' customer.id %}">
+    Delete Customer
+</a>
+
 <a href="{% url 'customer_list' %}">Back to Customers</a>
 
 {% endblock %}

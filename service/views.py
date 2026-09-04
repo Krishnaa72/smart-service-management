@@ -37,3 +37,36 @@ def customer_detail(request, id):
     }
 
     return render(request, 'service/customer_detail.html', content)
+
+def customer_update(request, id):
+    customer = get_object_or_404(Customer, id=id)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, instance=customer)
+
+        if form.is_valid():
+            form.save()
+            return redirect('customer_detail', id=customer.id)
+
+    else:
+        form = CustomerForm(instance=customer)
+
+    content = {
+        'form': form,
+        'customer': customer
+    }
+
+    return render(request, 'service/customer_form.html', content)
+
+def customer_delete(request, id):
+    customer = get_object_or_404(Customer, id=id)
+
+    if request.method == 'POST':
+        customer.delete()
+        return redirect('customer_list')
+
+    content = {
+        'customer': customer
+    }
+
+    return render(request, 'service/customer_confirm_delete.html', content)

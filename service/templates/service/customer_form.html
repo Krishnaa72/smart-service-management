@@ -1,21 +1,35 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Add Customer
+    {% if customer %}
+        Edit Customer
+    {% else %}
+        Add Customer
+    {% endif %}
 {% endblock %}
 
 {% block content %}
 
-<h1>Add Customer</h1>
+    {% if customer %}
+        <h1>Edit Customer</h1>
+    {% else %}
+        <h1>Add Customer</h1>
+    {% endif %}
 
-<form method="POST">
+    <form method="POST">
 
-    {% csrf_token %}
+        {% csrf_token %}
 
-    {{ form.as_p }}
+        {{ form.as_p }}
 
-    <button type="submit">Add Customer</button>
+        <button type="submit">
+            {% if customer %}
+                Update Customer
+            {% else %}
+                Add Customer
+            {% endif %}
+        </button>
 
-</form>
+    </form>
 
 {% endblock %}
