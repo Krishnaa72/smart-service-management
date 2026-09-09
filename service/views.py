@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from . models import Customer
-from . forms import CustomerForm
+from .models import Customer, ServiceRequest
+from . forms import CustomerForm, ServiceRequestForm
 
 def customer_list(request):
     customers = Customer.objects.all()
@@ -70,3 +70,38 @@ def customer_delete(request, id):
     }
 
     return render(request, 'service/customer_confirm_delete.html', content)
+
+def service_request_list(request):
+    service_requests = ServiceRequest.objects.all()
+
+    content = {
+        'service_requests': service_requests
+    }
+
+    return render(
+        request,
+        'service/service_request_list.html',
+        content
+    )
+
+def service_request_create(request):
+
+    if request.method == 'POST':
+        form = ServiceRequestForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('service_request_list')
+
+    else:
+        form = ServiceRequestForm()
+
+    content = {
+        'form': form
+    }
+
+    return render(
+        request,
+        'service/service_request_form.html',
+        content
+    )

@@ -7,4 +7,7 @@ urlpatterns = [
     path('customers/<int:id>/', views.customer_detail, name='customer_detail'),
     path('customers/<int:id>/edit/', views.customer_update, name='customer_update'),
     path('customers/<int:id>/delete/', views.customer_delete, name='customer_delete'),
+    
+    path('service-requests/', views.service_request_list, name='service_request_list'),
+    path('service-requests/add/', views.service_request_create, name='service_request_create'),
 ]
