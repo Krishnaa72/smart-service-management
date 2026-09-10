@@ -106,3 +106,33 @@ def service_request_detail(request, id):
     }
 
     return render(request, 'service/service_request_detail.html', content)
+
+def service_request_update(request, id):
+    service_request = get_object_or_404(ServiceRequest, id=id)
+
+    if request.method == 'POST':
+        form = ServiceRequestForm(
+            request.POST,
+            instance=service_request
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect(
+                'service_request_detail',
+                id=service_request.id
+            )
+
+    else:
+        form = ServiceRequestForm(instance=service_request)
+
+    content = {
+        'form': form,
+        'service_request': service_request
+    }
+
+    return render(
+        request,
+        'service/service_request_form.html',
+        content
+    )

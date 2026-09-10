@@ -1,23 +1,37 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Add Service Request
+
+    {% if service_request %}
+        Edit Service Request
+    {% else %}
+        Add Service Request
+    {% endif %}
+
 {% endblock %}
 
 {% block content %}
 
-<h1>Add Service Request</h1>
+    {% if service_request %}
+        <h1>Edit Service Request</h1>
+    {% else %}
+        <h1>Add Service Request</h1>
+    {% endif %}
 
-<form method="POST">
+    <form method="POST">
 
-    {% csrf_token %}
+        {% csrf_token %}
 
-    {{ form.as_p }}
+        {{ form.as_p }}
 
-    <button type="submit">
-        Create Request
-    </button>
+        <button type="submit">
+            {% if service_request %}
+                Update Request
+            {% else %}
+                Create Request
+            {% endif %}
+        </button>
 
-</form>
+    </form>
 
 {% endblock %}

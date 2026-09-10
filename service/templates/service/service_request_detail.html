@@ -35,5 +35,9 @@ Service Request Details
 <a href="{% url 'service_request_list' %}">
     Back to Service Requests
 </a>
+&nbsp;
+<a href="{% url 'service_request_update' service_request.id %}">
+    Edit Request
+</a>
 
 {% endblock %}
