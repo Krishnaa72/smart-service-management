@@ -9,6 +9,14 @@ class Customer(models.Model):
         return self.name
 
 class ServiceRequest(models.Model):
+
+    class Status(models.TextChoices):
+        PENDING = 'Pending', 'Pending'
+        ASSIGNED = 'Assigned', 'Assigned'
+        IN_PROGRESS = 'In Progress', 'In Progress'
+        COMPLETED = 'Completed', 'Completed'
+        CANCELLED = 'Cancelled', 'Cancelled'
+
     customer = models.ForeignKey(
         Customer,
         on_delete=models.CASCADE,
@@ -20,7 +28,8 @@ class ServiceRequest(models.Model):
 
     status = models.CharField(
         max_length=20,
-        default='Pending'
+        choices=Status.choices,
+        default=Status.PENDING
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -28,5 +37,4 @@ class ServiceRequest(models.Model):
 
     def __str__(self):
         return self.title
-
     

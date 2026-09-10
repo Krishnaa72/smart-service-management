@@ -78,11 +78,7 @@ def service_request_list(request):
         'service_requests': service_requests
     }
 
-    return render(
-        request,
-        'service/service_request_list.html',
-        content
-    )
+    return render(request, 'service/service_request_list.html', content)
 
 def service_request_create(request):
 
@@ -100,8 +96,13 @@ def service_request_create(request):
         'form': form
     }
 
-    return render(
-        request,
-        'service/service_request_form.html',
-        content
-    )
+    return render(request, 'service/service_request_form.html', content)
+
+def service_request_detail(request, id):
+    service_request = get_object_or_404(ServiceRequest, id=id)
+
+    content = {
+        'service_request': service_request
+    }
+
+    return render(request, 'service/service_request_detail.html', content)

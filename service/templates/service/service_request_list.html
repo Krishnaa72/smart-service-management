@@ -37,6 +37,10 @@ Service Requests
             Created:
             {{ service_request.created_at }}
         </p>
+
+        <a href="{% url 'service_request_detail' service_request.id %}">
+        View Details
+        </a>
     </div>
 
 {% empty %}

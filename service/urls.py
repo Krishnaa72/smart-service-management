@@ -10,4 +10,5 @@ urlpatterns = [
     
     path('service-requests/', views.service_request_list, name='service_request_list'),
     path('service-requests/add/', views.service_request_create, name='service_request_create'),
+    path('service-requests/<int:id>/', views.service_request_detail, name='service_request_detail'),
 ]
