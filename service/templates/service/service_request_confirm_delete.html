@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Service Request
+{% endblock %}
+
+{% block content %}
+
+<h1>Delete Service Request</h1>
+
+<p>
+    Are you sure you want to delete
+    <strong>{{ service_request.title }}</strong>?
+</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <button type="submit">
+        Yes, Delete
+    </button>
+
+    <a href="{% url 'service_request_detail' service_request.id %}">
+        Cancel
+    </a>
+
+</form>
+
+{% endblock %}
