@@ -78,7 +78,8 @@ def customer_delete(request, id):
 def service_request_list(request):
     service_requests = ServiceRequest.objects.select_related(
         'customer',
-        'category'
+        'category',
+        'technician'
     )
 
     content = {

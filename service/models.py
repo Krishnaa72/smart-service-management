@@ -15,6 +15,15 @@ class ServiceCategory(models.Model):
     def __str__(self):
         return self.name
 
+class Technician(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    specialization = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
 class ServiceRequest(models.Model):
 
     class Status(models.TextChoices):
@@ -34,6 +43,14 @@ class ServiceRequest(models.Model):
         ServiceCategory,
         on_delete=models.PROTECT,
         related_name='service_requests',
+    )
+
+    technician = models.ForeignKey(
+        Technician,
+        on_delete=models.SET_NULL,
+        related_name='service_requests',
+        null=True,
+        blank=True
     )
 
     title = models.CharField(max_length=200)
