@@ -8,40 +8,20 @@ Service Requests
 
 <h1>Service Requests</h1>
 
-<a href="{% url 'service_request_create' %}">
-    Add Service Request
-</a>
-    
+<a href="{% url 'service_request_create' %}">Add Service Request</a>
 
 {% for service_request in service_requests %}
+    <h2>{{ service_request.title }}</h2>
 
-    <div>
-        <h3>{{ service_request.title }}</h3>
+    <p>Customer: {{ service_request.customer }}</p>
+    <p>Category: {{ service_request.category }}</p>
+    <p>Description: {{ service_request.description }}</p>
+    <p>Status: {{ service_request.get_status_display }}</p>
+    <p>Created: {{ service_request.created_at }}</p>
 
-        <p>
-            Customer:
-            {{ service_request.customer.name }}
-        </p>
-
-        <p>
-            Description:
-            {{ service_request.description }}
-        </p>
-
-        <p>
-            Status:
-            {{ service_request.status }}
-        </p>
-
-        <p>
-            Created:
-            {{ service_request.created_at }}
-        </p>
-
-        <a href="{% url 'service_request_detail' service_request.id %}">
+    <a href="{% url 'service_request_detail' service_request.id %}">
         View Details
-        </a>
-    </div>
+    </a>
 
 {% empty %}
 

@@ -10,4 +10,4 @@ class CustomerForm(forms.ModelForm):
 class ServiceRequestForm(forms.ModelForm):
     class Meta:
         model = ServiceRequest
-        fields = ['customer', 'title', 'description', 'status']
+        fields = ['customer', 'category', 'title', 'description', 'status']

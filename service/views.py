@@ -76,7 +76,10 @@ def customer_delete(request, id):
 #-------------------------------SERVICE REQUEST--------------------------------------#
 
 def service_request_list(request):
-    service_requests = ServiceRequest.objects.all()
+    service_requests = ServiceRequest.objects.select_related(
+        'customer',
+        'category'
+    )
 
     content = {
         'service_requests': service_requests
@@ -122,10 +125,7 @@ def service_request_update(request, id):
 
         if form.is_valid():
             form.save()
-            return redirect(
-                'service_request_detail',
-                id=service_request.id
-            )
+            return redirect('service_request_detail', id=service_request.id)
 
     else:
         form = ServiceRequestForm(instance=service_request)
@@ -135,11 +135,7 @@ def service_request_update(request, id):
         'service_request': service_request
     }
 
-    return render(
-        request,
-        'service/service_request_form.html',
-        content
-    )
+    return render(request, 'service/service_request_form.html', content)
 
 def service_request_delete(request, id):
     service_request = get_object_or_404(ServiceRequest, id=id)
@@ -152,8 +148,4 @@ def service_request_delete(request, id):
         'service_request': service_request
     }
 
-    return render(
-        request,
-        'service/service_request_confirm_delete.html',
-        content
-    )
+    return render(request, 'service/service_request_confirm_delete.html', content)

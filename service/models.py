@@ -8,6 +8,13 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+class ServiceCategory(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
 class ServiceRequest(models.Model):
 
     class Status(models.TextChoices):
@@ -21,6 +28,12 @@ class ServiceRequest(models.Model):
         Customer,
         on_delete=models.CASCADE,
         related_name='service_requests'
+    )
+
+    category = models.ForeignKey(
+        ServiceCategory,
+        on_delete=models.PROTECT,
+        related_name='service_requests',
     )
 
     title = models.CharField(max_length=200)
