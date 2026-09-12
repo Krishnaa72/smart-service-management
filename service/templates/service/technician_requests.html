@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Technician Requests
+{% endblock %}
+
+{% block content %}
+
+<h1>Technician: {{ technician.name }}</h1>
+
+<h2>Assigned Service Requests</h2>
+
+{% for service_request in service_requests %}
+
+    <h3>{{ service_request.title }}</h3>
+
+    <p>Customer: {{ service_request.customer }}</p>
+    <p>Category: {{ service_request.category }}</p>
+    <p>Status: {{ service_request.get_status_display }}</p>
+
+    <a href="{% url 'service_request_detail' service_request.id %}">
+        View Request
+    </a>
+
+{% empty %}
+
+    <p>No service requests assigned to this technician.</p>
+
+{% endfor %}
+
+{% endblock %}

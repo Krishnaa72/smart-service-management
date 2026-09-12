@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Technician Details
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ technician.name }}</h1>
+
+<p>Email: {{ technician.email }}</p>
+<p>Phone: {{ technician.phone }}</p>
+<p>Specialization: {{ technician.specialization }}</p>
+
+<a href="{% url 'technician_requests' technician.id %}">
+    View Assigned Requests
+</a>
+
+{% endblock %}

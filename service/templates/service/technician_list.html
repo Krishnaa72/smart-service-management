@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Technicians
+{% endblock %}
+
+{% block content %}
+
+<h1>Technicians</h1>
+
+{% for technician in technicians %}
+
+    <h2>{{ technician.name }}</h2>
+
+    <p>Email: {{ technician.email }}</p>
+    <p>Phone: {{ technician.phone }}</p>
+    <p>Specialization: {{ technician.specialization }}</p>
+
+    <a href="{% url 'technician_detail' technician.id %}">
+        View Details
+    </a>
+
+{% empty %}
+
+    <p>No technicians found.</p>
+
+{% endfor %}
+
+{% endblock %}

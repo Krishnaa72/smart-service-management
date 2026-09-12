@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Customer, ServiceRequest
+from .models import Customer, ServiceRequest, Technician
 from . forms import CustomerForm, ServiceRequestForm
 
 #-------------------------------CUSTOMER LIST--------------------------------------#
@@ -150,3 +150,32 @@ def service_request_delete(request, id):
     }
 
     return render(request, 'service/service_request_confirm_delete.html', content)
+
+def technician_requests(request, id):
+    technician = get_object_or_404(Technician, id=id)
+    service_requests = technician.service_requests.select_related('customer','category')
+
+    content = {
+        'technician': technician,
+        'service_requests': service_requests
+    }
+
+    return render(request, 'service/technician_requests.html', content )
+
+def technician_detail(request, id):
+    technician = get_object_or_404(Technician, id=id)
+
+    content = {
+        'technician': technician
+    }
+
+    return render(request, 'service/technician_detail.html', content)
+
+def technician_list(request):
+    technicians = Technician.objects.all()
+
+    content = {
+        'technicians': technicians
+    }
+
+    return render(request, 'service/technician_list.html', content)
