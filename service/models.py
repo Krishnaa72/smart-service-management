@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Customer(models.Model):
     name = models.CharField(max_length=100)
@@ -16,6 +17,14 @@ class ServiceCategory(models.Model):
         return self.name
 
 class Technician(models.Model):
+
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15)

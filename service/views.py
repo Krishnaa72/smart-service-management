@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Customer, ServiceRequest, Technician
 from . forms import CustomerForm, ServiceRequestForm
+from django.contrib.auth.decorators import login_required
 
 #-------------------------------CUSTOMER LIST--------------------------------------#
 
+@login_required
 def customer_list(request):
     customers = Customer.objects.all()
 
@@ -13,6 +15,7 @@ def customer_list(request):
 
     return render(request, 'service/customer_list.html', content)
 
+@login_required
 def customer_create(request):
 
     if request.method == 'POST':
@@ -31,6 +34,7 @@ def customer_create(request):
 
     return render(request, 'service/customer_form.html', content)
 
+@login_required
 def customer_detail(request, id):
     customer = get_object_or_404(Customer, id=id)
 
@@ -40,6 +44,7 @@ def customer_detail(request, id):
 
     return render(request, 'service/customer_detail.html', content)
 
+@login_required
 def customer_update(request, id):
     customer = get_object_or_404(Customer, id=id)
 
@@ -60,6 +65,7 @@ def customer_update(request, id):
 
     return render(request, 'service/customer_form.html', content)
 
+@login_required
 def customer_delete(request, id):
     customer = get_object_or_404(Customer, id=id)
 
@@ -75,6 +81,7 @@ def customer_delete(request, id):
 
 #-------------------------------SERVICE REQUEST--------------------------------------#
 
+@login_required
 def service_request_list(request):
     service_requests = ServiceRequest.objects.select_related(
         'customer',
@@ -88,6 +95,7 @@ def service_request_list(request):
 
     return render(request, 'service/service_request_list.html', content)
 
+@login_required
 def service_request_create(request):
 
     if request.method == 'POST':
@@ -106,6 +114,7 @@ def service_request_create(request):
 
     return render(request, 'service/service_request_form.html', content)
 
+@login_required
 def service_request_detail(request, id):
     service_request = get_object_or_404(ServiceRequest, id=id)
 
@@ -115,6 +124,7 @@ def service_request_detail(request, id):
 
     return render(request, 'service/service_request_detail.html', content)
 
+@login_required
 def service_request_update(request, id):
     service_request = get_object_or_404(ServiceRequest, id=id)
 
@@ -138,6 +148,7 @@ def service_request_update(request, id):
 
     return render(request, 'service/service_request_form.html', content)
 
+@login_required
 def service_request_delete(request, id):
     service_request = get_object_or_404(ServiceRequest, id=id)
 
@@ -151,6 +162,9 @@ def service_request_delete(request, id):
 
     return render(request, 'service/service_request_confirm_delete.html', content)
 
+#-------------------------------TECHNICIAN--------------------------------------#
+
+@login_required
 def technician_requests(request, id):
     technician = get_object_or_404(Technician, id=id)
     service_requests = technician.service_requests.select_related('customer','category')
@@ -162,6 +176,7 @@ def technician_requests(request, id):
 
     return render(request, 'service/technician_requests.html', content )
 
+@login_required
 def technician_detail(request, id):
     technician = get_object_or_404(Technician, id=id)
 
@@ -171,6 +186,7 @@ def technician_detail(request, id):
 
     return render(request, 'service/technician_detail.html', content)
 
+@login_required
 def technician_list(request):
     technicians = Technician.objects.all()
 
