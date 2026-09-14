@@ -8,12 +8,13 @@ Technician Details
 
 <h1>{{ technician.name }}</h1>
 
-<p>Email: {{ technician.email }}</p>
+<p>Email: {{ technician.user.email }}</p>
 <p>Phone: {{ technician.phone }}</p>
 <p>Specialization: {{ technician.specialization }}</p>
 
 <a href="{% url 'technician_requests' technician.id %}">
     View Assigned Requests
 </a>
+<p>Logged in as: {{ request.user.username }}</p>
 
 {% endblock %}
