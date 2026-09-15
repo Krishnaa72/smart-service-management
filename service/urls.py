@@ -14,7 +14,8 @@ urlpatterns = [
     path('service-requests/<int:id>/edit/', views.service_request_update, name='service_request_update'),
     path('service-requests/<int:id>/delete/', views.service_request_delete, name='service_request_delete'),
 
-    path('technicians/<int:id>/requests/', views.technician_requests, name='technician_requests'),
+    path('technician/requests/', views.technician_requests, name='technician_requests'),
     path('technicians/<int:id>/', views.technician_detail, name='technician_detail'),
     path('technicians/', views.technician_list, name='technician_list'),
+    path('technician/requests/<int:id>/update/', views.technician_request_update, name='technician_request_update'),
 ]

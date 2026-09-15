@@ -11,3 +11,8 @@ class ServiceRequestForm(forms.ModelForm):
     class Meta:
         model = ServiceRequest
         fields = ['customer', 'category', 'technician', 'title', 'description', 'status']
+
+class TechnicianServiceRequestForm(forms.ModelForm):
+    class Meta:
+        model = ServiceRequest
+        fields = ['status']

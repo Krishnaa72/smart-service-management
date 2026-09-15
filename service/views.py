@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Customer, ServiceRequest, Technician
-from . forms import CustomerForm, ServiceRequestForm
+from .forms import (CustomerForm, ServiceRequestForm, TechnicianServiceRequestForm)
 from django.contrib.auth.decorators import login_required
 
 #-------------------------------CUSTOMER LIST--------------------------------------#
@@ -165,16 +165,21 @@ def service_request_delete(request, id):
 #-------------------------------TECHNICIAN--------------------------------------#
 
 @login_required
-def technician_requests(request, id):
-    technician = get_object_or_404(Technician, id=id)
-    service_requests = technician.service_requests.select_related('customer','category')
+def technician_requests(request):
+
+    technician = request.user.technician
+
+    service_requests = technician.service_requests.select_related(
+        'customer',
+        'category'
+    )
 
     content = {
         'technician': technician,
         'service_requests': service_requests
     }
 
-    return render(request, 'service/technician_requests.html', content )
+    return render(request, 'service/technician_requests.html', content)
 
 @login_required
 def technician_detail(request, id):
@@ -195,3 +200,35 @@ def technician_list(request):
     }
 
     return render(request, 'service/technician_list.html', content)
+
+@login_required
+def technician_request_update(request, id):
+
+    service_request = get_object_or_404(
+        ServiceRequest,
+        id=id,
+        technician=request.user.technician
+    )
+
+    if request.method == 'POST':
+
+        form = TechnicianServiceRequestForm(
+            request.POST,
+            instance=service_request
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect('service_request_detail', id=service_request.id)
+
+    else:
+        form = TechnicianServiceRequestForm(
+            instance=service_request
+        )
+
+    content = {
+        'form': form,
+        'service_request': service_request
+    }
+
+    return render(request, 'service/technician_request_form.html', content)

@@ -12,7 +12,7 @@ Technician Details
 <p>Phone: {{ technician.phone }}</p>
 <p>Specialization: {{ technician.specialization }}</p>
 
-<a href="{% url 'technician_requests' technician.id %}">
+<a href="{% url 'technician_requests' %}">
     View Assigned Requests
 </a>
 <p>Logged in as: {{ request.user.username }}</p>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Update Service Request
+{% endblock %}
+
+{% block content %}
+
+<h1>Update Service Request</h1>
+
+<h2>{{ service_request.title }}</h2>
+
+<p>Customer: {{ service_request.customer }}</p>
+<p>Category: {{ service_request.category }}</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Update Status</button>
+
+</form>
+
+{% endblock %}

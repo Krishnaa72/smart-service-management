@@ -22,6 +22,10 @@ Technician Requests
         View Request
     </a>
 
+    <a href="{% url 'technician_request_update' service_request.id %}">
+        Update Status
+    </a>
+
 {% empty %}
 
     <p>No service requests assigned to this technician.</p>
