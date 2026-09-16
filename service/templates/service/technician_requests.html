@@ -18,7 +18,7 @@ Technician Requests
     <p>Category: {{ service_request.category }}</p>
     <p>Status: {{ service_request.get_status_display }}</p>
 
-    <a href="{% url 'service_request_detail' service_request.id %}">
+    <a href="{% url 'technician_request_detail' service_request.id %}">
         View Request
     </a>
 

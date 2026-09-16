@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Service Request
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ service_request.title }}</h1>
+
+<p>
+    Customer: {{ service_request.customer }}
+</p>
+
+<p>
+    Category: {{ service_request.category }}
+</p>
+
+<p>
+    Description: {{ service_request.description }}
+</p>
+
+<p>
+    Status: {{ service_request.get_status_display }}
+</p>
+
+<p>
+    Created: {{ service_request.created_at }}
+</p>
+
+<a href="{% url 'technician_requests' %}">
+    Back to My Requests
+</a>
+
+<a href="{% url 'technician_request_update' service_request.id %}">
+    Update Status
+</a>
+
+{% endblock %}
